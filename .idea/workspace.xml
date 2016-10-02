@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d13cd7bb-b805-4ccd-8c58-ab440fdf62bf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/.idea/runConfigurations.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/domain/Gadget.java" afterPath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/domain/Gadget.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/domain/Loan.java" afterPath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/domain/Loan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/domain/Reservation.java" afterPath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/domain/Reservation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/service/Callback.java" afterPath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/service/Callback.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/service/HttpVerb.java" afterPath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/service/HttpVerb.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/service/LibraryService.java" afterPath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/service/LibraryService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/service/LoginToken.java" afterPath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/service/LoginToken.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/service/Request.java" afterPath="$PROJECT_DIR$/ch/hsr/mge/gadgeothek/service/Request.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/project/app/src/main/AndroidManifest.xml" />
     </list>
     <ignored path="mge-miniprojekt-android.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -205,7 +195,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="0" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
