@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawerHome"
+            android:checked="true"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/drawerLogin"
+            android:icon="@drawable/ic_fingerprint_black_24dp"
+            android:title="Login" />
+
+        <item
+            android:id="@+id/drawerReg"
+            android:icon="@drawable/ic_person_add_black_24dp"
+            android:title="Registration" />
+
+        <item
+            android:id="@+id/drawerLoad"
+            android:icon="@drawable/ic_system_update_alt_black_24dp"
+            android:title="Ausleihen" />
+
+        <item
+            android:id="@+id/drawerRes"
+            android:icon="@drawable/ic_developer_board_black_24dp"
+            android:title="Reservationen" />
+
+        <item
+            android:id="@+id/drawerSettings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Einstellungen" />
+
+    </group>
+</menu>
