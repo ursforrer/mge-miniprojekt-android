@@ -17,42 +17,34 @@
         android:layout_alignParentStart="true"
         android:weightSum="1">
 
-        <TextView
-            android:text="Willkommen!"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView4"
-            android:textStyle="normal|bold"
-            android:textSize="36sp"
-            android:textAlignment="center"
-            android:textColor="@android:color/black" />
-
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="234dp"
+            android:layout_height="200dp"
             app:srcCompat="@drawable/gadgeothek_logo"
             android:id="@+id/imageView"
-            android:layout_weight="0.94" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_weight="0.94"
+            android:layout_marginBottom="15dp" />
 
         <Button
-            android:text="Login"
+            android:text="@string/textLoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/loginbutton_start" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="19dp" />
+            android:id="@+id/loginbutton_start"
+            android:layout_marginBottom="15dp" />
 
         <Button
-            android:text="Registrierung"
+            android:text="@string/textRegButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/regbutton_start" />
+            android:id="@+id/regbutton_start"
+            android:layout_marginBottom="15dp" />
+
+        <TextView
+            android:text="@string/textSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:textAlignment="center" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Gadgeothek</string>
+    <string name="regText">Geben Sie Ihre Angaben an, um einen Account in der Gadgeothek erstellen zu können.</string>
+    <string name="textLoginButton">Login</string>
+    <string name="input_Mail_hint">Mailaddresse</string>
+    <string name="input_Password_hint">Password</string>
+    <string name="input_Name_hint" >Name</string>
+    <string name="input_MartrikelNummer_hint">Martrikelnummer</string>
+    <string name="textRegButton">Registrieren</string>
+    <string name="textSettings">Server anpassen</string>
+    <string name="textWillkommen">Willkommen!</string>
 </resources>
