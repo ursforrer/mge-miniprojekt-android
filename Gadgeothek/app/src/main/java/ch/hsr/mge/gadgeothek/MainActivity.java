@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(false);
         navigationView.getMenu().findItem(R.id.drawerRes).setVisible(false);
 
+
         fragmentManager = getFragmentManager();
         switchFragment(new StartFragment());
         pages.push(1);

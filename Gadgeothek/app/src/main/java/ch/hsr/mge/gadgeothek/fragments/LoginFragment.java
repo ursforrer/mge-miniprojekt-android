@@ -31,6 +31,5 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         TextInputEditText textInputEditTextPassword = (TextInputEditText) v.findViewById(R.id.editTextLoginPassword);
         String password = textInputEditTextPassword.getText().toString();
-
     }
 }
