@@ -20,7 +20,7 @@
         android:layout_above="@+id/email"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:text="Urs Forrer"
+        android:text="Nicht eingeloggt"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     <TextView
@@ -31,7 +31,7 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:text="urs.forrer@hsr.ch"
+        android:text="Mailaddresse"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </RelativeLayout>

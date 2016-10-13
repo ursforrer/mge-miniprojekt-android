@@ -4,14 +4,14 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import java.util.Stack;
 
 import ch.hsr.mge.gadgeothek.fragments.*;
 
@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private View content;
     private FragmentManager fragmentManager;
-    private Stack<Integer> pages = new Stack<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,24 +27,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        content = findViewById(R.id.content);
+
+        // ActionBar mit einer Toolbar ersetzen
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Toolbar anpassen mit
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_black_24dp);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        content = findViewById(R.id.content);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
+        // Bestimmte Menupunkte auf der Seite ausblenden
         navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(false);
         navigationView.getMenu().findItem(R.id.drawerRes).setVisible(false);
 
 
         fragmentManager = getFragmentManager();
         switchFragment(new StartFragment());
-        pages.push(1);
-        setTitle("Willkommen!");
     }
 
     @Override
@@ -73,5 +75,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.add(R.id.content, fragment);
         fragmentTransaction.addToBackStack("");
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.drawer, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                drawer.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
