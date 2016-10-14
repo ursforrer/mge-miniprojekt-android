@@ -25,16 +25,12 @@ public class StartFragment extends Fragment implements View.OnClickListener {
 
         navView = (NavigationView) getActivity().findViewById(R.id.navigation_view);
 
-        //Sollen die OnClickLister mit setOnClickListener hier hier oder in die untere onClick Methode?
-
         return root;
     }
 
     @Override
     public void onClick(View v) {
-
         // Behandlung der OnClick-Methode hier jeweils in
-
         switch (v.getId()) {
             case R.id.loginbutton_start:
                 navView.setCheckedItem(R.id.drawerLogin);

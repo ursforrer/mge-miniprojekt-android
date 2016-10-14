@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -33,9 +34,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Toolbar anpassen mit
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_black_24dp);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        // Toolbar anpassen
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -75,12 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.add(R.id.content, fragment);
         fragmentTransaction.addToBackStack("");
         fragmentTransaction.commit();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.drawer, menu);
-        return true;
     }
 
     @Override

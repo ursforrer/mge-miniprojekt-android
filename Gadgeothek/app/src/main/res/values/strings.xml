@@ -9,4 +9,6 @@
     <string name="textRegButton">Registrieren</string>
     <string name="textSettings">Server anpassen</string>
     <string name="textWillkommen">Willkommen!</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
