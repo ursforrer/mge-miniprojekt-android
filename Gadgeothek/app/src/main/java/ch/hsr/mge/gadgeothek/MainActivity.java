@@ -50,6 +50,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         fragmentManager = getFragmentManager();
         switchFragment(new StartFragment());
+
+        // Menu anpassen, jenachdem ob man eingeloggt ist oder nicht.
+        if(LibraryService.isLoggedIn()) {
+            navigationView.getMenu().findItem(R.id.drawerLogin).setVisible(false);
+            navigationView.getMenu().findItem(R.id.drawerReg).setVisible(false);
+        }
+        else {
+            navigationView.getMenu().findItem(R.id.drawerRes).setVisible(false);
+            navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(false);
+        }
     }
 
     @Override
