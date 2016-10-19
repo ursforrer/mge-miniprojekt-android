@@ -47,10 +47,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             public void onCompletion(Boolean input) {
                 if (input) {
                     // Logged in
-                    Snack("Logged in",getView());
+                    Snack("Sie sind nun eingeloggt. Viel Spass.",getView());
+                    getFragmentManager().beginTransaction().replace(R.id.content, new SettingsFragment()).commit();
+                    //Snack("Logged in",getView());
                 }
                 else {
                     // Passwort oder Benutzer falsch bzw. nicht gefunden
+                    // Wie soll das da funktionieren, diese Methode wird gar nie aufgerufen.
                     Snack("Passwort falsch", getView());
                 }
             }
