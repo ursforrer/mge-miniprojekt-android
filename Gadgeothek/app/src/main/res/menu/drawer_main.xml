@@ -5,7 +5,7 @@
             android:id="@+id/drawerHome"
             android:checked="true"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home" />
+            android:title="Start" />
 
         <item
             android:id="@+id/drawerLogin"

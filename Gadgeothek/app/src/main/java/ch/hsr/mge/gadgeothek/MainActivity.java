@@ -42,11 +42,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Bestimmte Menupunkte auf der Seite ausblenden
-        navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(false);
-        navigationView.getMenu().findItem(R.id.drawerRes).setVisible(false);
-
-
         fragmentManager = getFragmentManager();
         switchFragment(new StartFragment());
     }
