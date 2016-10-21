@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // SharedPerferences laden und speichern
         settings = getSharedPreferences("MY_PREFS", MODE_PRIVATE);
-        LibraryService.setServerAddress(settings.getString("server", "http://10.5.2.19:8080/public"));
+        LibraryService.setServerAddress(settings.getString("server", "http://mge1.dev.ifs.hsr.ch/public"));
 
         fragmentManager = getFragmentManager();
         switchFragment(new StartFragment());
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else {
             navigationView.getMenu().findItem(R.id.drawerRes).setVisible(false);
             navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(false);
+            navigationView.getMenu().findItem(R.id.drawerLogout).setVisible(false);
         }
     }
 
@@ -77,6 +78,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.drawerSettings:
                 getFragmentManager().beginTransaction().replace(R.id.content, new SettingsFragment()).commit();
+                break;
+            case R.id.drawerLogout:
+                getFragmentManager().beginTransaction().replace(R.id.content, new LoginFragment()).commit();
+                break;
         }
         drawer.closeDrawers();
         return true;

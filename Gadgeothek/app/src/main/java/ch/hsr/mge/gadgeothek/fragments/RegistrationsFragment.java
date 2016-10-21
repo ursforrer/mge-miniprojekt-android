@@ -48,7 +48,6 @@ public class RegistrationsFragment extends Fragment implements View.OnClickListe
         number = textInputEditTextMartikelnummer.getText().toString();
         mail = textInputEditTextMail.getText().toString();
         password = textInputEditTextPassword.getText().toString();
-        //getFragmentManager().beginTransaction().replace(R.id.content, new LoginFragment()).commit();
 
         LibraryService.register(mail, password, name, number, new Callback<Boolean>() {
             @Override
@@ -59,7 +58,7 @@ public class RegistrationsFragment extends Fragment implements View.OnClickListe
 
             @Override
             public void onError(String message) {
-                Snack("Registered not sucessfully", getView());
+                Snack("Registration was not successfully." + "\n" + "Error: " + message, getView());
             }
         });
 

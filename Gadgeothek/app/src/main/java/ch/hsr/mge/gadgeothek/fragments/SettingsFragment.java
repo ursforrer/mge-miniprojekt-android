@@ -34,7 +34,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         // Refernez für Buttonverarbeitung herauslesen
         textInputServer = (TextInputEditText) root.findViewById(R.id.editTextSettings);
         // Aktuelle Serveradresse setzen
-        textInputServer.setText("");
+        SharedPreferences settings = getActivity().getApplicationContext().getSharedPreferences("MY_PREFS", Context.MODE_PRIVATE);
+        textInputServer.setText(settings.getString("server",""));
         //getActivity().setTitle("Einstellungen");
         return root;
     }
@@ -44,6 +45,15 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         // Server auslesen, setzen und zurückmelden, dass der Server gewechselt wurde.
         server = textInputServer.getText().toString();
         LibraryService.setServerAddress(server);
+        // Aktuelle Adresse in die SharedPreferences speichern
+        SharedPreferences settings;
+        SharedPreferences.Editor editor;
+        settings = getActivity().getBaseContext().getSharedPreferences("MY_PREFS", Context.MODE_PRIVATE);
+        editor = settings.edit();
+
+        editor.putString("server", server);
+        editor.commit();
+        // Meldung anzeigen, dass die Serveraddresse geändert wurde.
         Snack("Serveraddresse wurde gewechselt.", getView());
     }
 
