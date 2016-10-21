@@ -22,7 +22,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.home_fragment, container, false);
-        root.findViewById(R.id.buttonLoginScreen).setOnClickListener(this);
+        //root.findViewById(R.id.buttonLoginScreen).setOnClickListener(this);
 
         return root;
     }

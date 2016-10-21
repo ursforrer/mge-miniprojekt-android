@@ -79,8 +79,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         menuItem.setChecked(true);
         switch (menuItem.getItemId()) {
-            case R.id.drawerHome:
+            case R.id.drawerStart:
                 switchFragment(new StartFragment());
+                break;
+            case R.id.drawerHome:
+                switchFragment(new HomeFragment());
                 break;
             case R.id.drawerLogin:
                 switchFragment(new LoginFragment());
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Snack("Logout was not successfully." + "\n" + "Error: " + message,content);
                     }
                 });
-                getFragmentManager().beginTransaction().replace(R.id.content, new StartFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment()).addToBackStack("").commit();
                 break;
         }
         drawer.closeDrawers();

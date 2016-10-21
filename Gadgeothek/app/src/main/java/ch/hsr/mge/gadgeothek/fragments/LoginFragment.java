@@ -19,7 +19,7 @@ import ch.hsr.mge.gadgeothek.service.*;
  */
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
-    
+
     TextInputEditText textInputEditTextMail;
     TextInputEditText textInputEditTextPassword;
     String mail;
