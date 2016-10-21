@@ -19,8 +19,7 @@ import ch.hsr.mge.gadgeothek.service.*;
  */
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
-
-    private View view;
+    
     TextInputEditText textInputEditTextMail;
     TextInputEditText textInputEditTextPassword;
     String mail;
@@ -53,7 +52,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     navigationView.getMenu().findItem(R.id.drawerRes).setVisible(true);
                     navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(true);
                     navigationView.getMenu().findItem(R.id.drawerLogout).setVisible(true);
-                    getFragmentManager().beginTransaction().replace(R.id.content, new SettingsFragment()).commit();
+                    getFragmentManager().beginTransaction().replace(R.id.content, new SettingsFragment()).addToBackStack("").commit();
                 }
             }
 

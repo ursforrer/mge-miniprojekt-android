@@ -3,6 +3,7 @@ package ch.hsr.mge.gadgeothek;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -11,10 +12,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.style.LineBackgroundSpan;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import ch.hsr.mge.gadgeothek.fragments.*;
+import ch.hsr.mge.gadgeothek.service.Callback;
 import ch.hsr.mge.gadgeothek.service.LibraryService;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,9 +51,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // SharedPerferences laden und speichern
         settings = getSharedPreferences("MY_PREFS", MODE_PRIVATE);
         LibraryService.setServerAddress(settings.getString("server", "http://mge1.dev.ifs.hsr.ch/public"));
+        if (settings.getString("server","").equals(""))  {
+            SharedPreferences.Editor editor;
+            editor = settings.edit();
+            editor.putString("server", "http://mge1.dev.ifs.hsr.ch/public");
+            editor.commit();
+        }
 
         fragmentManager = getFragmentManager();
-        switchFragment(new StartFragment());
+        if(fragmentManager.getBackStackEntryCount() == 0) {
+            getFragmentManager().beginTransaction().add(R.id.content, new StartFragment()).commit();
+        }
 
         // Menu anpassen, jenachdem ob man eingeloggt ist oder nicht.
         if(LibraryService.isLoggedIn()) {
@@ -68,19 +80,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         menuItem.setChecked(true);
         switch (menuItem.getItemId()) {
             case R.id.drawerHome:
-                getFragmentManager().beginTransaction().replace(R.id.content, new StartFragment()).commit();
+                switchFragment(new StartFragment());
                 break;
             case R.id.drawerLogin:
-                getFragmentManager().beginTransaction().replace(R.id.content, new LoginFragment()).commit();
+                switchFragment(new LoginFragment());
                 break;
             case R.id.drawerReg:
-                getFragmentManager().beginTransaction().replace(R.id.content, new RegistrationsFragment()).commit();
+                switchFragment(new RegistrationsFragment());
                 break;
             case R.id.drawerSettings:
-                getFragmentManager().beginTransaction().replace(R.id.content, new SettingsFragment()).commit();
+                switchFragment(new SettingsFragment());
                 break;
             case R.id.drawerLogout:
-                getFragmentManager().beginTransaction().replace(R.id.content, new LoginFragment()).commit();
+                LibraryService.logout(new Callback<Boolean>() {
+                    private View content = findViewById(R.id.content);
+                    @Override
+                    public void onCompletion(Boolean input) {
+                        Snack("You are now logged out. See you again.",content);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        // Fehler
+                        Snack("Logout was not successfully." + "\n" + "Error: " + message,content);
+                    }
+                });
+                getFragmentManager().beginTransaction().replace(R.id.content, new StartFragment()).commit();
                 break;
         }
         drawer.closeDrawers();
@@ -89,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void switchFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.content, fragment);
+        fragmentTransaction.replace(R.id.content, fragment);
         fragmentTransaction.addToBackStack("");
         fragmentTransaction.commit();
     }
@@ -102,5 +127,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void Snack(String message, View v) {
+        Snackbar snackbar = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 }

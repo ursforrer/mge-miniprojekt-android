@@ -50,11 +50,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         SharedPreferences.Editor editor;
         settings = getActivity().getBaseContext().getSharedPreferences("MY_PREFS", Context.MODE_PRIVATE);
         editor = settings.edit();
-
         editor.putString("server", server);
         editor.commit();
+
         // Meldung anzeigen, dass die Serveraddresse geändert wurde.
-        Snack("Serveraddresse wurde gewechselt.", getView());
+        Snack("Server is now changed.", getView());
     }
 
     private void Snack(String message, View v) {

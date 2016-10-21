@@ -53,7 +53,7 @@ public class RegistrationsFragment extends Fragment implements View.OnClickListe
             @Override
             public void onCompletion(Boolean input) {
                 Snack("Registered sucessfully", getView());
-                getFragmentManager().beginTransaction().replace(R.id.content, new LoginFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content, new LoginFragment()).addToBackStack("").commit();
             }
 
             @Override
