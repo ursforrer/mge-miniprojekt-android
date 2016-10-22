@@ -67,8 +67,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(LibraryService.isLoggedIn()) {
             navigationView.getMenu().findItem(R.id.drawerLogin).setVisible(false);
             navigationView.getMenu().findItem(R.id.drawerReg).setVisible(false);
+            navigationView.getMenu().findItem(R.id.drawerStart).setVisible(false);
+            navigationView.getMenu().findItem(R.id.drawerSettings).setVisible(false);
         }
         else {
+            navigationView.getMenu().findItem(R.id.drawerHome).setVisible(false);
             navigationView.getMenu().findItem(R.id.drawerRes).setVisible(false);
             navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(false);
             navigationView.getMenu().findItem(R.id.drawerLogout).setVisible(false);
@@ -87,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.drawerLogin:
                 switchFragment(new LoginFragment());
+                break;
+            case R.id.drawerLoan:
+                switchFragment(new AusleiheFragment());
                 break;
             case R.id.drawerReg:
                 switchFragment(new RegistrationsFragment());
@@ -108,7 +114,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Snack("Logout was not successfully." + "\n" + "Error: " + message,content);
                     }
                 });
-                getFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment()).addToBackStack("").commit();
+                NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+                navigationView.getMenu().findItem(R.id.drawerRes).setVisible(false);
+                navigationView.getMenu().findItem(R.id.drawerHome).setVisible(false);
+                navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(false);
+                navigationView.getMenu().findItem(R.id.drawerLogout).setVisible(false);
+                navigationView.getMenu().findItem(R.id.drawerLogin).setVisible(true);
+                navigationView.getMenu().findItem(R.id.drawerReg).setVisible(true);
+                navigationView.getMenu().findItem(R.id.drawerStart).setVisible(true);
+                navigationView.getMenu().findItem(R.id.drawerSettings).setVisible(true);
+                getFragmentManager().beginTransaction().replace(R.id.content, new StartFragment()).addToBackStack("").commit();
                 break;
         }
         drawer.closeDrawers();
