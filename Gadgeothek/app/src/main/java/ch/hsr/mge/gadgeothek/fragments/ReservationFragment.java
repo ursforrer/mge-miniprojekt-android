@@ -12,6 +12,7 @@ import java.util.List;
 
 import ch.hsr.mge.gadgeothek.R;
 import ch.hsr.mge.gadgeothek.adapter.LoanAdapter;
+import ch.hsr.mge.gadgeothek.adapter.ReservationAdapter;
 import ch.hsr.mge.gadgeothek.domain.Loan;
 import ch.hsr.mge.gadgeothek.domain.Reservation;
 import ch.hsr.mge.gadgeothek.service.Callback;
@@ -23,4 +24,41 @@ import ch.hsr.mge.gadgeothek.service.LibraryService;
 
 public class ReservationFragment extends Fragment {
 
+    public RecyclerView recyclerView;
+    public RecyclerView.LayoutManager layoutManager;
+    public ReservationAdapter reservationAdapter;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.res_fragment, container, false);
+
+        recyclerView = (RecyclerView) root.findViewById(R.id.recyclerViewReservation);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        reservationAdapter = new ReservationAdapter();
+
+        LibraryService.getReservationsForCustomer(new Callback<List<Reservation>>() {
+            @Override
+            public void onCompletion(List<Reservation> input) {
+                reservationAdapter.setReservationsFromDB(input);
+                recyclerView.setAdapter(reservationAdapter);
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
+
+        return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getActivity().setTitle("Reservations");
+    }
 }

@@ -67,4 +67,10 @@ public class RegistrationsFragment extends Fragment implements View.OnClickListe
         Snackbar snackbar = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getActivity().setTitle("Register");
+    }
 }

@@ -11,10 +11,14 @@ import android.widget.TextView;
 public class HolderLoan extends RecyclerView.ViewHolder {
     public View parent;
     public TextView gadgetName;
+    public TextView pickupDate;
+    public TextView returnDate;
 
-    public HolderLoan(View parent, TextView gadgetName) {
+    public HolderLoan(View parent, TextView gadgetName, TextView pickupDate, TextView returnDate) {
         super(parent);
         this.parent = parent;
         this.gadgetName = gadgetName;
+        this.pickupDate = pickupDate;
+        this.returnDate = returnDate;
     }
 }

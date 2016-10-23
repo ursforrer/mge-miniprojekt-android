@@ -61,4 +61,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         Snackbar snackbar = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getActivity().setTitle("Settings");
+    }
 }

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_developer_board_black_60dp"
         android:layout_marginTop="41dp"
-        android:id="@+id/imageView4"
+        android:id="@+id/imageReservation"
         android:layout_below="@+id/imageAusleihe"
         android:layout_alignLeft="@+id/imageAusleihe"
         android:layout_alignStart="@+id/imageAusleihe" />
@@ -26,9 +26,9 @@
         android:textStyle="normal|bold"
         android:textSize="24sp"
         android:layout_marginTop="15dp"
-        android:layout_alignTop="@+id/imageView4"
-        android:layout_toRightOf="@+id/imageView4"
-        android:layout_toEndOf="@+id/imageView4"
+        android:layout_alignTop="@+id/imageReservation"
+        android:layout_toRightOf="@+id/imageReservation"
+        android:layout_toEndOf="@+id/imageReservation"
         android:layout_marginLeft="31dp"
         android:layout_marginStart="31dp" />
 

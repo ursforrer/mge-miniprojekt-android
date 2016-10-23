@@ -46,4 +46,10 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 getFragmentManager().beginTransaction().replace(R.id.content, new SettingsFragment()).addToBackStack("").commit();
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getActivity().setTitle("Welcome");
+    }
 }

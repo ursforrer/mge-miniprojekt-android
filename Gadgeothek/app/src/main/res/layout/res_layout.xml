@@ -10,12 +10,11 @@
     android:paddingStart="20dp"
     android:paddingEnd="20dp">
 
-
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/gadgetName"
+        android:id="@+id/gadgetName_reservation"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textStyle="normal|bold"
@@ -40,10 +39,10 @@
             android:layout_marginTop="8dp">
 
             <TextView
-                android:text="Pickup Date"
+                android:text="Reservation Date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textPick"
+                android:id="@+id/textRes"
                 android:layout_weight="1"
                 android:width="120dp" />
 
@@ -51,7 +50,7 @@
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/pickupdate"
+                android:id="@+id/resdate"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -62,7 +61,7 @@
             android:layout_marginTop="8dp">
 
             <TextView
-                android:text="Return Date"
+                android:text="Waiting Position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textReturn"
@@ -73,10 +72,31 @@
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/returndate"
-                android:layout_weight="1" />
+                android:id="@+id/watingposition"
+                android:layout_weight="1"
+                android:textAlignment="textStart" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:text="Ready"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/linearLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/textView3" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBoxReady"
+        android:checked="false"
+        android:clickable="false"
+        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp" />
 
 </RelativeLayout>

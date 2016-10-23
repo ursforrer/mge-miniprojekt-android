@@ -2,6 +2,7 @@ package ch.hsr.mge.gadgeothek.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -52,5 +53,11 @@ public class AusleiheFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getActivity().setTitle("Loans");
     }
 }

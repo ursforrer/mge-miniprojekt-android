@@ -94,6 +94,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.drawerLoan:
                 switchFragment(new AusleiheFragment());
                 break;
+            case R.id.drawerRes:
+                switchFragment(new ReservationFragment());
+                break;
             case R.id.drawerReg:
                 switchFragment(new RegistrationsFragment());
                 break;
