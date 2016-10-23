@@ -31,7 +31,6 @@ public class RegistrationsFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.reg_fragment, container, false);
         root.findViewById(R.id.buttonRegister).setOnClickListener(this);
-        //getActivity().setTitle("Registrieren");
 
         textInputEditTextMail = (TextInputEditText) root.findViewById(R.id.editTextMail);
         textInputEditTextMartikelnummer = (TextInputEditText) root.findViewById(R.id.editTextNumber);

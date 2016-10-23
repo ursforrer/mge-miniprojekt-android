@@ -58,6 +58,6 @@ public class AusleiheFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        getActivity().setTitle("Loans");
+        getActivity().setTitle("My Loans");
     }
 }

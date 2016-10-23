@@ -2,6 +2,7 @@ package ch.hsr.mge.gadgeothek.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,11 +23,12 @@ import ch.hsr.mge.gadgeothek.service.LibraryService;
  * Created by Urs Forrer on 10.10.2016.
  */
 
-public class ReservationFragment extends Fragment {
+public class ReservationFragment extends Fragment implements View.OnClickListener {
 
-    public RecyclerView recyclerView;
-    public RecyclerView.LayoutManager layoutManager;
-    public ReservationAdapter reservationAdapter;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private ReservationAdapter reservationAdapter;
+    private FloatingActionButton addbutton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,12 +55,25 @@ public class ReservationFragment extends Fragment {
             }
         });
 
+        addbutton = (FloatingActionButton) root.findViewById(R.id.floatingActionButton);
+        addbutton.setOnClickListener(this);
+
         return root;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.floatingActionButton:
+                //navView.setCheckedItem(R.id.drawerLogin);
+                getFragmentManager().beginTransaction().replace(R.id.content, new GadgetReservationsFragment()).addToBackStack("").commit();
+                break;
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        getActivity().setTitle("Reservations");
+        getActivity().setTitle("My Reservations");
     }
 }

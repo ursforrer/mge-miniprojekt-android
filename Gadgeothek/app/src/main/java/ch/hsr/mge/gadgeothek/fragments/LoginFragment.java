@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             public void onCompletion(Boolean input) {
                 if (input) {
                     // Logged in
-                    Snack("You are now logged in. Have Fun.",getView());
+                    Snack("You are now logged in. Have Fun.", getActivity().getCurrentFocus());
                     NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.navigation_view);
                     navigationView.getMenu().findItem(R.id.drawerRes).setVisible(true);
                     navigationView.getMenu().findItem(R.id.drawerHome).setVisible(true);

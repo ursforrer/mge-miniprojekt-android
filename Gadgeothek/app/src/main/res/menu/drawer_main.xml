@@ -26,12 +26,12 @@
         <item
             android:id="@+id/drawerLoan"
             android:icon="@drawable/ic_system_update_alt_black_24dp"
-            android:title="Ausleihen" />
+            android:title="My Loans" />
 
         <item
             android:id="@+id/drawerRes"
             android:icon="@drawable/ic_developer_board_black_24dp"
-            android:title="Reservationen" />
+            android:title="My Reservations   " />
 
         <item
             android:id="@+id/drawerSettings"
