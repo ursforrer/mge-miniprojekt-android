@@ -50,14 +50,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     Snack("You are now logged in. Have Fun.", getActivity().getCurrentFocus());
                     NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.navigation_view);
                     navigationView.getMenu().findItem(R.id.drawerRes).setVisible(true);
-                    navigationView.getMenu().findItem(R.id.drawerHome).setVisible(true);
                     navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(true);
                     navigationView.getMenu().findItem(R.id.drawerLogout).setVisible(true);
                     navigationView.getMenu().findItem(R.id.drawerLogin).setVisible(false);
                     navigationView.getMenu().findItem(R.id.drawerReg).setVisible(false);
                     navigationView.getMenu().findItem(R.id.drawerStart).setVisible(false);
                     navigationView.getMenu().findItem(R.id.drawerSettings).setVisible(false);
-                    getFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment()).addToBackStack("").commit();
+                    getFragmentManager().beginTransaction().replace(R.id.content, new AusleiheFragment()).addToBackStack("").commit();
                 }
             }
 

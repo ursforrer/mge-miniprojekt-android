@@ -63,4 +63,12 @@ public class ReservationAdapter extends RecyclerView.Adapter<HolderReservation> 
         this.reservations = reservations;
     }
 
+    public void remove(int position) {
+        reservations.remove(position);
+    }
+
+    public Reservation get(int position) {
+        return reservations.get(position);
+    }
+
 }

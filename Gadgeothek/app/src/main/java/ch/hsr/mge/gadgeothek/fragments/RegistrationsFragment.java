@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,10 @@ public class RegistrationsFragment extends Fragment implements View.OnClickListe
         textInputEditTextMartikelnummer = (TextInputEditText) root.findViewById(R.id.editTextNumber);
         textInputEditTextName = (TextInputEditText) root.findViewById(R.id.editTextName);
         textInputEditTextPassword = (TextInputEditText) root.findViewById(R.id.editTextPassword);
+
+        textInputEditTextMail.addTextChangedListener(mailTextWatcher);
+        textInputEditTextMartikelnummer.addTextChangedListener(martikelNummerTextWatcher);
+        textInputEditTextPassword.addTextChangedListener(passwordTextWatcher);
 
         navView = (NavigationView) getActivity().findViewById(R.id.navigation_view);
 
@@ -72,4 +78,61 @@ public class RegistrationsFragment extends Fragment implements View.OnClickListe
         super.onStart();
         getActivity().setTitle("Register");
     }
+
+    private TextWatcher mailTextWatcher = new TextWatcher() {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (!textInputEditTextMail.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+                textInputEditTextMail.setError("Invalid Email Address");
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // TODO Auto-generated method stub
+        }
+    };
+
+    private TextWatcher passwordTextWatcher = new TextWatcher() {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(textInputEditTextPassword.getText().length() < 8) {
+                textInputEditTextPassword.setError("Password to short");
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // TODO Auto-generated method stub
+        }
+    };
+
+    private TextWatcher martikelNummerTextWatcher = new TextWatcher() {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(textInputEditTextPassword.getText().length() < 8) {
+                textInputEditTextPassword.setError("Password to short");
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // TODO Auto-generated method stub
+        }
+    };
 }

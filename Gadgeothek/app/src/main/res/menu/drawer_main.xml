@@ -8,12 +8,6 @@
             android:title="Start" />
 
         <item
-            android:id="@+id/drawerHome"
-            android:checked="true"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home" />
-
-        <item
             android:id="@+id/drawerLogin"
             android:icon="@drawable/ic_fingerprint_black_24dp"
             android:title="Login" />
