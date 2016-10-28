@@ -6,6 +6,8 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         root.findViewById(R.id.buttonLoginScreen).setOnClickListener(this);
         textInputEditTextMail = (TextInputEditText) root.findViewById(R.id.editTextLoginMail);
         textInputEditTextPassword = (TextInputEditText) root.findViewById(R.id.editTextLoginPassword);
+
+        textInputEditTextMail.addTextChangedListener(mailTextWatcher);
+        textInputEditTextPassword.addTextChangedListener(passwordTextWatcher);
+
         return root;
     }
 
@@ -78,4 +84,42 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         super.onStart();
         getActivity().setTitle("Login");
     }
+
+    private TextWatcher mailTextWatcher = new TextWatcher() {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (!textInputEditTextMail.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+                textInputEditTextMail.setError("Invalid Email Address");
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // TODO Auto-generated method stub
+        }
+    };
+
+    private TextWatcher passwordTextWatcher = new TextWatcher() {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(textInputEditTextPassword.getText().length() < 8) {
+                textInputEditTextPassword.setError("Password to short");
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // TODO Auto-generated method stub
+        }
+    };
 }

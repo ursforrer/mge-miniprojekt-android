@@ -120,8 +120,8 @@ public class RegistrationsFragment extends Fragment implements View.OnClickListe
     private TextWatcher martikelNummerTextWatcher = new TextWatcher() {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if(textInputEditTextPassword.getText().length() < 8) {
-                textInputEditTextPassword.setError("Password to short");
+            if (!textInputEditTextMartikelnummer.getText().toString().matches("[1-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]") && textInputEditTextMartikelnummer.getText().length() != 0) {
+                textInputEditTextMartikelnummer.setError("Invalid Martrikel Number");
             }
         }
 
