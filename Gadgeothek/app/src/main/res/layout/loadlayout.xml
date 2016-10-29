@@ -22,61 +22,48 @@
         android:textSize="24sp"
         android:textColor="@color/accent" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp">
+        android:columnCount="3"
+        android:rowCount="2"
+        android:paddingTop="36dp">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp">
+        <TextView
+            android:text="@string/pickup_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textPick"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:width="120dp" />
 
-            <TextView
-                android:text="@string/pickup_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textPick"
-                android:layout_weight="1"
-                android:width="120dp" />
+        <TextView
+            android:text="@string/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pickupdate"
+            android:layout_column="1"
+            android:layout_row="0" />
 
-            <TextView
-                android:text="@string/textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/pickupdate"
-                android:layout_weight="1" />
-        </LinearLayout>
+        <TextView
+            android:text="@string/return_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textReturn"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:width="120dp"
+            android:paddingTop="8dp" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp">
+        <TextView
+            android:text="@string/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/returndate"
+            android:layout_column="1"
+            android:layout_row="1" />
 
-            <TextView
-                android:text="@string/return_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textReturn"
-                android:layout_weight="1"
-                android:width="120dp" />
-
-            <TextView
-                android:text="@string/textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/returndate"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </GridLayout>
 
 </RelativeLayout>
