@@ -3,6 +3,7 @@ package ch.hsr.mge.gadgeothek.fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -43,7 +44,7 @@ public class GadgetReservationsFragment extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.res_create_fragment, container, false);
+        final View root = inflater.inflate(R.layout.res_create_fragment, container, false);
 
         Helpers.updateHeader(getActivity());
 
@@ -75,6 +76,13 @@ public class GadgetReservationsFragment extends Fragment {
                             }
                             isReserved = false;
                         }
+                        if (gadgetsFiltered.isEmpty()) {
+                            TextView text = (TextView) root.findViewById(R.id.no_data_res_create);
+                            text.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.INVISIBLE);
+                            text.setText("There aren't any gadgets avaiable at this time. Come back later.");
+                            text.setTextColor(Color.parseColor("#4fc3f7"));
+                        }
                         gadgetswithButtonAdapter.setGadgetsFromDB(gadgetsFiltered);
                         recyclerView.setAdapter(gadgetswithButtonAdapter);
                         // OnClick Aktion, reservieren eines Items
@@ -99,7 +107,11 @@ public class GadgetReservationsFragment extends Fragment {
 
                                             @Override
                                             public void onError(String message) {
-
+                                                TextView text = (TextView) root.findViewById(R.id.no_data_res);
+                                                text.setVisibility(View.VISIBLE);
+                                                recyclerView.setVisibility(View.INVISIBLE);
+                                                text.setText("There is a problem with the connection to the server, try again later.");
+                                                text.setTextColor(Color.parseColor("#4fc3f7"));
                                             }
                                         });
                                     }
@@ -109,7 +121,6 @@ public class GadgetReservationsFragment extends Fragment {
 
                     @Override
                     public void onError(String message) {
-
                     }
                 });
 

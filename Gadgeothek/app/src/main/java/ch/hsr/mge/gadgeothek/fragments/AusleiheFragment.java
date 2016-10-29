@@ -3,6 +3,7 @@ package ch.hsr.mge.gadgeothek.fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -35,7 +36,7 @@ public class AusleiheFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.loan_fragment, container, false);
+        final View root = inflater.inflate(R.layout.loan_fragment, container, false);
 
         Helpers.updateHeader(getActivity());
 
@@ -50,13 +51,29 @@ public class AusleiheFragment extends Fragment {
         LibraryService.getLoansForCustomer(new Callback<List<Loan>>() {
             @Override
             public void onCompletion(List<Loan> input) {
-                loanAdapter.setLoansFromDB(input);
-                recyclerView.setAdapter(loanAdapter);
+                if (input.isEmpty()) {
+                    loanAdapter.setLoansFromDB(input);
+                    recyclerView.setAdapter(loanAdapter);
+                    TextView text = (TextView) root.findViewById(R.id.no_data_loan);
+                    text.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    text.setText("You don't have any loans at this time. Go to the Gadgeothek at your schoool to loan a device.");
+                    text.setTextColor(Color.parseColor("#4fc3f7"));
+
+                }
+                else {
+                    loanAdapter.setLoansFromDB(input);
+                    recyclerView.setAdapter(loanAdapter);
+                }
             }
 
             @Override
             public void onError(String message) {
-
+                TextView text = (TextView) root.findViewById(R.id.no_data_res);
+                text.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+                text.setText("There is a problem with the connection to the server, try again later.");
+                text.setTextColor(Color.parseColor("#4fc3f7"));
             }
         });
 

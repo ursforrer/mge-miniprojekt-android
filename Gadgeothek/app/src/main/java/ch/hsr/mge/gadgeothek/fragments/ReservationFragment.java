@@ -47,7 +47,7 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.res_fragment, container, false);
+        final View root = inflater.inflate(R.layout.res_fragment, container, false);
 
         Helpers.updateHeader(getActivity());
 
@@ -62,13 +62,24 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
         LibraryService.getReservationsForCustomer(new Callback<List<Reservation>>() {
             @Override
             public void onCompletion(List<Reservation> input) {
+                if (input.isEmpty()) {
+                    TextView text = (TextView) root.findViewById(R.id.no_data_res);
+                    text.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.INVISIBLE);
+                    text.setText("You don't have any reservations at this time. Use the button at the bottom right, to add a new one.");
+                    text.setTextColor(Color.parseColor("#4fc3f7"));
+                }
                 reservationAdapter.setReservationsFromDB(input);
                 recyclerView.setAdapter(reservationAdapter);
             }
 
             @Override
             public void onError(String message) {
-
+                TextView text = (TextView) root.findViewById(R.id.no_data_res);
+                text.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+                text.setText("There is a problem with the connection to the server, try again later.");
+                text.setTextColor(Color.parseColor("#4fc3f7"));
             }
         });
 
