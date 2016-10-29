@@ -4,13 +4,17 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import ch.hsr.mge.gadgeothek.*;
+import ch.hsr.mge.gadgeothek.helpers.Helpers;
+import ch.hsr.mge.gadgeothek.helpers.SnackMessages;
 import ch.hsr.mge.gadgeothek.service.Callback;
 import ch.hsr.mge.gadgeothek.service.LibraryService;
 
@@ -28,6 +32,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.settings_fragment, container, false);
+
+        Helpers.updateHeader(getActivity());
 
         // Click Listener setzen
         root.findViewById(R.id.settingsbutton).setOnClickListener(this);
@@ -54,17 +60,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         editor.commit();
 
         // Meldung anzeigen, dass die Serveraddresse geändert wurde.
-        Snack("Server is now changed.", getView());
+        SnackMessages.Snack("Server is now changed.", getView());
     }
 
     private void Snack(String message, View v) {
         Snackbar snackbar = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
         snackbar.show();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        getActivity().setTitle("Settings");
     }
 }

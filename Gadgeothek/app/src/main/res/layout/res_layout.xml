@@ -11,7 +11,7 @@
     android:paddingEnd="20dp">
 
     <TextView
-        android:text="TextView"
+        android:text="@string/textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gadgetName_reservation"
@@ -19,7 +19,7 @@
         android:layout_alignParentStart="true"
         android:textStyle="normal|bold"
         android:textSize="24sp"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/accent" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -39,7 +39,7 @@
             android:layout_marginTop="8dp">
 
             <TextView
-                android:text="Reservation Date"
+                android:text="@string/reservation_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textRes"
@@ -47,7 +47,7 @@
                 android:width="120dp" />
 
             <TextView
-                android:text="TextView"
+                android:text="@string/textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/resdate"
@@ -61,7 +61,7 @@
             android:layout_marginTop="8dp">
 
             <TextView
-                android:text="Waiting Position"
+                android:text="@string/waiting_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textReturn"
@@ -69,7 +69,7 @@
                 android:width="120dp" />
 
             <TextView
-                android:text="TextView"
+                android:text="@string/textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/watingposition"
@@ -80,7 +80,7 @@
     </LinearLayout>
 
     <TextView
-        android:text="Ready"
+        android:text="@string/ready"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/linearLayout"

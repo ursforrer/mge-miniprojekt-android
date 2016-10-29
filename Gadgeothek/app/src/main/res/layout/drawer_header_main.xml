@@ -12,26 +12,28 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="@dimen/activity_vertical_margin"
-        android:src="@drawable/ic_account_circle_white_24dp"/>
+        android:src="@drawable/ic_account_circle_white_24dp"
+        android:contentDescription="@string/header" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/email"
+        android:layout_above="@+id/mail_avatar"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:text="Nicht eingeloggt"
+        android:text="@string/not_logged_in"
+        android:id="@+id/name_avatar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     <TextView
-        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:text="Mailaddresse"
+        android:text=""
+        android:id="@+id/mail_avatar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </RelativeLayout>

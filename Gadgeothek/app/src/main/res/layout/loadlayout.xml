@@ -12,7 +12,7 @@
 
 
     <TextView
-        android:text="TextView"
+        android:text="@string/textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gadgetName"
@@ -20,7 +20,7 @@
         android:layout_alignParentStart="true"
         android:textStyle="normal|bold"
         android:textSize="24sp"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/accent" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -40,7 +40,7 @@
             android:layout_marginTop="8dp">
 
             <TextView
-                android:text="Pickup Date"
+                android:text="@string/pickup_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textPick"
@@ -48,7 +48,7 @@
                 android:width="120dp" />
 
             <TextView
-                android:text="TextView"
+                android:text="@string/textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/pickupdate"
@@ -62,7 +62,7 @@
             android:layout_marginTop="8dp">
 
             <TextView
-                android:text="Return Date"
+                android:text="@string/return_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textReturn"
@@ -70,7 +70,7 @@
                 android:width="120dp" />
 
             <TextView
-                android:text="TextView"
+                android:text="@string/textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/returndate"

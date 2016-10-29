@@ -16,8 +16,11 @@ import android.text.style.LineBackgroundSpan;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import ch.hsr.mge.gadgeothek.fragments.*;
+import ch.hsr.mge.gadgeothek.helpers.Helpers;
+import ch.hsr.mge.gadgeothek.helpers.SnackMessages;
 import ch.hsr.mge.gadgeothek.service.Callback;
 import ch.hsr.mge.gadgeothek.service.LibraryService;
 
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private View content;
     private FragmentManager fragmentManager;
     SharedPreferences settings;
+    TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             editor.commit();
         }
 
+        // Verhindern, dass mehrere FragmentManager gestartet werden.
         fragmentManager = getFragmentManager();
         if(fragmentManager.getBackStackEntryCount() == 0) {
             getFragmentManager().beginTransaction().add(R.id.content, new StartFragment()).commit();
@@ -104,24 +109,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     private View content = findViewById(R.id.content);
                     @Override
                     public void onCompletion(Boolean input) {
-                        Snack("You are now logged out. See you again.",content);
+                        SnackMessages.Snack("You are now logged out. See you again.",content);
                     }
 
                     @Override
                     public void onError(String message) {
                         // Fehler
-                        Snack("Logout was not successfully." + "\n" + "Error: " + message,content);
+                        SnackMessages.Snack("Logout was not successfully." + "\n" + "Error: " + message,content);
                     }
                 });
+
+                // Menu aktualisieren
                 NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-                navigationView.getMenu().findItem(R.id.drawerRes).setVisible(false);
-                navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(false);
-                navigationView.getMenu().findItem(R.id.drawerLogout).setVisible(false);
-                navigationView.getMenu().findItem(R.id.drawerLogin).setVisible(true);
-                navigationView.getMenu().findItem(R.id.drawerReg).setVisible(true);
-                navigationView.getMenu().findItem(R.id.drawerStart).setVisible(true);
-                navigationView.getMenu().findItem(R.id.drawerSettings).setVisible(true);
-                getFragmentManager().beginTransaction().replace(R.id.content, new StartFragment()).addToBackStack("").commit();
+                Helpers.navigationOnLogout(navigationView);
+
+                // Temporäre Userdaten wieder löschen
+                Helpers.setPreferencesOnLogout(getSharedPreferences("MY_PREFS", Context.MODE_PRIVATE));
+
+                // Drawerheader aktualisieren
+                View header = navigationView.getHeaderView(0);
+                TextView mail = (TextView) header.findViewById(R.id.mail_avatar);
+                TextView name = (TextView) header.findViewById(R.id.name_avatar);
+                mail.setText(settings.getString("mail",""));
+                name.setText(settings.getString("status",""));
+
+                // Damit nicht mehr auf eingeloggte Seiten zugeriffen werden kann
+                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                switchFragment(new StartFragment());
                 break;
         }
         drawer.closeDrawers();
@@ -145,8 +160,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    private void Snack(String message, View v) {
-        Snackbar snackbar = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
+     @Override
+    public void onStop() {
+         super.onStop();
+         Helpers.setPreferencesOnLogout(getSharedPreferences("MY_PREFS", Context.MODE_PRIVATE));
+     }
 }

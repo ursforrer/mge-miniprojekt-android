@@ -1,19 +1,26 @@
 package ch.hsr.mge.gadgeothek.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
 import ch.hsr.mge.gadgeothek.R;
 import ch.hsr.mge.gadgeothek.adapter.LoanAdapter;
 import ch.hsr.mge.gadgeothek.domain.Loan;
+import ch.hsr.mge.gadgeothek.helpers.Helpers;
 import ch.hsr.mge.gadgeothek.service.Callback;
 import ch.hsr.mge.gadgeothek.service.LibraryService;
 
@@ -29,7 +36,8 @@ public class AusleiheFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.loan_fragment, container, false);
-        //root.findViewById(R.id.buttonLoginScreen).setOnClickListener(this);
+
+        Helpers.updateHeader(getActivity());
 
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);

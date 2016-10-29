@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ch.hsr.mge.gadgeothek.*;
+import ch.hsr.mge.gadgeothek.helpers.Helpers;
+import ch.hsr.mge.gadgeothek.helpers.SnackMessages;
 import ch.hsr.mge.gadgeothek.service.Callback;
 import ch.hsr.mge.gadgeothek.service.LibraryService;
 
@@ -33,6 +35,8 @@ public class RegistrationsFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.reg_fragment, container, false);
         root.findViewById(R.id.buttonRegister).setOnClickListener(this);
+
+        Helpers.updateHeader(getActivity());
 
         textInputEditTextMail = (TextInputEditText) root.findViewById(R.id.editTextMail);
         textInputEditTextMartikelnummer = (TextInputEditText) root.findViewById(R.id.editTextNumber);
@@ -57,20 +61,16 @@ public class RegistrationsFragment extends Fragment implements View.OnClickListe
         LibraryService.register(mail, password, name, number, new Callback<Boolean>() {
             @Override
             public void onCompletion(Boolean input) {
-                Snack("Registered sucessfully", getView());
+                SnackMessages.Snack("Registered sucessfully", getView());
                 getFragmentManager().beginTransaction().replace(R.id.content, new LoginFragment()).addToBackStack("").commit();
             }
 
             @Override
             public void onError(String message) {
-                Snack("Registration was not successfully." + "\n" + "Error: " + message, getView());
+                SnackMessages.Snack("Registration was not successfully." + "\n" + "Error: " + message, getView());
             }
         });
 
-    }
-    private void Snack(String message, View v) {
-        Snackbar snackbar = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
-        snackbar.show();
     }
 
     @Override

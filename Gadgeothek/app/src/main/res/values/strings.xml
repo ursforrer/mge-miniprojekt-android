@@ -9,4 +9,17 @@
     <string name="textRegButton">Registrieren</string>
     <string name="textSettings">Server anpassen</string>
     <string name="textWillkommen">Willkommen!</string>
+    <string name="not_logged_in">Not Logged in</string>
+    <string name="header">Header</string>
+    <string name="condition">Condition</string>
+    <string name="inventory_number">Inventory Number</string>
+    <string name="manufacturer">Manufacturer</string>
+    <string name="textview">TextView</string>
+    <string name="pickup_date">Pickup Date</string>
+    <string name="return_date">Return Date</string>
+    <string name="ready">Ready</string>
+    <string name="reservation_date">Reservation Date</string>
+    <string name="waiting_position">Waiting Position</string>
+    <string name="addresse">Addresse</string>
+    <string name="save_server_address">Save server address</string>
 </resources>

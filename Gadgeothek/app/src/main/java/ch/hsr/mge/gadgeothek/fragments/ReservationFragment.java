@@ -1,6 +1,8 @@
 package ch.hsr.mge.gadgeothek.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +19,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -24,6 +28,8 @@ import ch.hsr.mge.gadgeothek.adapter.LoanAdapter;
 import ch.hsr.mge.gadgeothek.adapter.ReservationAdapter;
 import ch.hsr.mge.gadgeothek.domain.Loan;
 import ch.hsr.mge.gadgeothek.domain.Reservation;
+import ch.hsr.mge.gadgeothek.helpers.Helpers;
+import ch.hsr.mge.gadgeothek.helpers.SnackMessages;
 import ch.hsr.mge.gadgeothek.service.Callback;
 import ch.hsr.mge.gadgeothek.service.LibraryService;
 
@@ -42,6 +48,8 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.res_fragment, container, false);
+
+        Helpers.updateHeader(getActivity());
 
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerViewReservation);
         recyclerView.setHasFixedSize(true);
@@ -97,22 +105,22 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
             }
 
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
 
                 if (direction == ItemTouchHelper.LEFT){
                     Reservation reservation = reservationAdapter.get(position);
-                    reservationAdapter.remove(position);
                     LibraryService.deleteReservation(reservation, new Callback<Boolean>() {
                         @Override
                         public void onCompletion(Boolean input) {
+                            reservationAdapter.remove(viewHolder.getAdapterPosition());
                             reservationAdapter.notifyDataSetChanged();
-                            Snack("The reservation was deleted.", getView());
+                            SnackMessages.Snack("The reservation was deleted.", getView());
                         }
 
                         @Override
                         public void onError(String message) {
-                            Snack("The reservation was not deleted, please try again", getView());
+                            SnackMessages.Snack("The reservation was not deleted, please try again", getView());
                         }
                     });
                 }
@@ -145,10 +153,4 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
-
-    private void Snack(String message, View v) {
-        Snackbar snackbar = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
-
 }

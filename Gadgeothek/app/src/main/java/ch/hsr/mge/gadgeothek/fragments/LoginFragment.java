@@ -3,9 +3,7 @@ package ch.hsr.mge.gadgeothek.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -14,7 +12,11 @@ import android.view.ViewGroup;
 
 
 import ch.hsr.mge.gadgeothek.*;
+import ch.hsr.mge.gadgeothek.helpers.Helpers;
+import ch.hsr.mge.gadgeothek.helpers.SnackMessages;
 import ch.hsr.mge.gadgeothek.service.*;
+
+import static ch.hsr.mge.gadgeothek.helpers.Helpers.setPreferencesOnLogin;
 
 /**
  * Created by Urs Forrer on 10.10.2016.
@@ -29,8 +31,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if(LibraryService.isLoggedIn()) {
+            Helpers.Logout(getActivity());
+        }
         View root = inflater.inflate(R.layout.login_fragment, container, false);
         root.findViewById(R.id.buttonLoginScreen).setOnClickListener(this);
+
+        Helpers.updateHeader(getActivity());
+
         textInputEditTextMail = (TextInputEditText) root.findViewById(R.id.editTextLoginMail);
         textInputEditTextPassword = (TextInputEditText) root.findViewById(R.id.editTextLoginPassword);
 
@@ -42,49 +50,44 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick (View v) {
-        //textInputEditTextMail = (TextInputEditText) v.findViewById(R.id.editTextLoginMail);
         mail = textInputEditTextMail.getText().toString();
-
-        //textInputEditTextPassword = (TextInputEditText) v.findViewById(R.id.editTextLoginPassword);
         password = textInputEditTextPassword.getText().toString();
 
         LibraryService.login(mail, password, new Callback<Boolean>() {
             @Override
             public void onCompletion(Boolean input) {
                 if (input) {
-                    // Logged in
-                    Snack("You are now logged in. Have Fun.", getActivity().getCurrentFocus());
+                    // Meldung, dass jetzt eingeloggt.
+                    SnackMessages.Snack("You are now logged in. Have Fun.", getActivity().getCurrentFocus());
+
+                    // Menu anpassen
                     NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.navigation_view);
-                    navigationView.getMenu().findItem(R.id.drawerRes).setVisible(true);
-                    navigationView.getMenu().findItem(R.id.drawerLoan).setVisible(true);
-                    navigationView.getMenu().findItem(R.id.drawerLogout).setVisible(true);
-                    navigationView.getMenu().findItem(R.id.drawerLogin).setVisible(false);
-                    navigationView.getMenu().findItem(R.id.drawerReg).setVisible(false);
-                    navigationView.getMenu().findItem(R.id.drawerStart).setVisible(false);
-                    navigationView.getMenu().findItem(R.id.drawerSettings).setVisible(false);
+                    Helpers.navigationOnLogin(navigationView);
+
+                    // Userdaten abspeichern für die Anzeige im Header
+                    setPreferencesOnLogin(getActivity(), mail);
+
+                    // Framgent wechseln
                     getFragmentManager().beginTransaction().replace(R.id.content, new AusleiheFragment()).addToBackStack("").commit();
                 }
             }
 
             @Override
             public void onError(String message) {
-                // Fehler
-                Snack("Login was not successfully." + "\n" + "Error: " + message, getView());
+                // Fehler anzeigen, wenn Login nicht erfolgreich war.
+                SnackMessages.Snack("Login was not successfully." + "\n" + "Error: " + message, getView());
             }
         });
-    }
-
-    private void Snack(String message, View v) {
-        Snackbar snackbar = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
-        snackbar.show();
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        // Titel ändnern
         getActivity().setTitle("Login");
     }
 
+    // Validation des Mailfeldes
     private TextWatcher mailTextWatcher = new TextWatcher() {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -104,6 +107,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     };
 
+    // Validation des Passwortfeldes
     private TextWatcher passwordTextWatcher = new TextWatcher() {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {

@@ -1,24 +1,34 @@
 package ch.hsr.mge.gadgeothek.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ch.hsr.mge.gadgeothek.R;
 import ch.hsr.mge.gadgeothek.adapter.GadgetswithButtonAdapter;
-import ch.hsr.mge.gadgeothek.adapter.ReservationAdapter;
 import ch.hsr.mge.gadgeothek.domain.Gadget;
 import ch.hsr.mge.gadgeothek.domain.Reservation;
+import ch.hsr.mge.gadgeothek.helpers.Helpers;
+import ch.hsr.mge.gadgeothek.helpers.SnackMessages;
 import ch.hsr.mge.gadgeothek.service.Callback;
 import ch.hsr.mge.gadgeothek.service.LibraryService;
+import ch.hsr.mge.gadgeothek.helpers.RecyclerItemClickListener;
 
 /**
  * Created by Urs Forrer on 23.10.2016.
@@ -29,10 +39,13 @@ public class GadgetReservationsFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private GadgetswithButtonAdapter gadgetswithButtonAdapter;
+    private AppCompatActivity actionBar;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.res_create_fragment, container, false);
+
+        Helpers.updateHeader(getActivity());
 
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerViewGadgetReservation);
         recyclerView.setHasFixedSize(true);
@@ -49,7 +62,7 @@ public class GadgetReservationsFragment extends Fragment {
                 LibraryService.getReservationsForCustomer(new Callback<List<Reservation>>() {
                     @Override
                     public void onCompletion(List<Reservation> input) {
-                        List<Gadget> gadgetsFiltered = new ArrayList<Gadget>();
+                        final List<Gadget> gadgetsFiltered = new ArrayList<Gadget>();
                         Boolean isReserved = false;
                         for(Gadget x:inputGadget) {
                             for (Reservation r:input) {
@@ -64,6 +77,34 @@ public class GadgetReservationsFragment extends Fragment {
                         }
                         gadgetswithButtonAdapter.setGadgetsFromDB(gadgetsFiltered);
                         recyclerView.setAdapter(gadgetswithButtonAdapter);
+                        // OnClick Aktion, reservieren eines Items
+                        recyclerView.addOnItemTouchListener(
+                                new RecyclerItemClickListener(getActivity().getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
+                                    @Override public void onItemClick(View view, final int position) {
+                                        LibraryService.reserveGadget(gadgetsFiltered.get(position), new Callback<Boolean>() {
+                                            @Override
+                                            public void onCompletion(Boolean input) {
+                                                if(input) {
+                                                    gadgetsFiltered.remove(position);
+                                                    gadgetswithButtonAdapter.notifyDataSetChanged();
+                                                    getFragmentManager().beginTransaction().replace(R.id.content, new ReservationFragment()).addToBackStack("").commit();
+                                                    SnackMessages.Snack("Reservation successfully added", getView());
+                                                    Log.d("S", "Reservation successfully added");
+                                                }
+                                                else {
+                                                    SnackMessages.Snack("Already 3 reservation or item is not avaiable", getView());
+                                                    Log.d("E", "Already 3 reservation or item is not avaiable");
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onError(String message) {
+
+                                            }
+                                        });
+                                    }
+                                })
+                        );
                     }
 
                     @Override
