@@ -58,6 +58,7 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
         recyclerView.setLayoutManager(layoutManager);
 
         reservationAdapter = new ReservationAdapter();
+        recyclerView.setAdapter(reservationAdapter);
 
         LibraryService.getReservationsForCustomer(new Callback<List<Reservation>>() {
             @Override
@@ -70,7 +71,7 @@ public class ReservationFragment extends Fragment implements View.OnClickListene
                     text.setTextColor(Color.parseColor("#4fc3f7"));
                 }
                 reservationAdapter.setReservationsFromDB(input);
-                recyclerView.setAdapter(reservationAdapter);
+                reservationAdapter.notifyDataSetChanged();
             }
 
             @Override

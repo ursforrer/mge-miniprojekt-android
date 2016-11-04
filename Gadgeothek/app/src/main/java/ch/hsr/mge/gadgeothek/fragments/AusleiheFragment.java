@@ -47,13 +47,14 @@ public class AusleiheFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         loanAdapter = new LoanAdapter();
+        recyclerView.setAdapter(loanAdapter);
 
         LibraryService.getLoansForCustomer(new Callback<List<Loan>>() {
             @Override
             public void onCompletion(List<Loan> input) {
                 if (input.isEmpty()) {
                     loanAdapter.setLoansFromDB(input);
-                    recyclerView.setAdapter(loanAdapter);
+                    loanAdapter.notifyDataSetChanged();
                     TextView text = (TextView) root.findViewById(R.id.no_data_loan);
                     text.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.INVISIBLE);

@@ -55,6 +55,7 @@ public class GadgetReservationsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         gadgetswithButtonAdapter = new GadgetswithButtonAdapter();
+        recyclerView.setAdapter(gadgetswithButtonAdapter);
 
         LibraryService.getGadgets(new Callback<List<Gadget>>() {
             @Override
@@ -84,7 +85,8 @@ public class GadgetReservationsFragment extends Fragment {
                             text.setTextColor(Color.parseColor("#4fc3f7"));
                         }
                         gadgetswithButtonAdapter.setGadgetsFromDB(gadgetsFiltered);
-                        recyclerView.setAdapter(gadgetswithButtonAdapter);
+                        gadgetswithButtonAdapter.notifyDataSetChanged();
+
                         // OnClick Aktion, reservieren eines Items
                         recyclerView.addOnItemTouchListener(
                                 new RecyclerItemClickListener(getActivity().getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
